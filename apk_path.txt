@@ -1,0 +1,7 @@
+word-C://Program Files (x86)//Microsoft Office//Office12//WINWORD.exe
+ppt-C://Program Files (x86)//Microsoft Office//Office12//POWERPNT.exe
+outlook-C://Program Files (x86)//Microsoft Office//Office12//OUTLOOK.exe
+onenote-C://Program Files (x86)//Microsoft Office//Office12//ONENOTE.exe
+excel-C://Program Files (x86)//Microsoft Office//Office12//EXCEL.exe
+vscode-C://Users//exper//AppData//Local//Programs//Microsoft VS Code//Code.exe
+androidstudio-C://Program Files//Android//Android Studio//bin//studio64.exe
