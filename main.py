@@ -6,7 +6,6 @@ from time import sleep
 import subprocess
 import tkinter.messagebox as tmsg
 
-
 def welcome_message(root):
     Label(root,text="Hello user! welcome to assistant",font=default,bg="yellow").pack(anchor="w",pady=15,padx=15)
 
@@ -32,7 +31,7 @@ def fetch(root,listbox,in_put):
             l.remove('open')
         if 'apk' in in_put:
             l.remove('apk')
-        apk = ' '.join(l)
+        apk = ''.join(l)
         print(apk)
         if '.exe' not in apk:
             apk = apk + '.exe'
@@ -47,17 +46,20 @@ def fetch(root,listbox,in_put):
             # listbox.insert(END,my_response)
         if not flag:
             try:
+                file = open('apk_path.txt','r')
                 for line in file:
                     if line == '':
                         break
                     data = line.strip().split('-')
                     name = data[0] + '.exe'
+                    print(f'{name} is loop bu {apk} is above')
                     path = data[1]
                     if name == apk:
                         flag = 1
                         subprocess.call(path)
                         my_response = f'Bot : apk {apk} launched'
                         listbox.insert(END,my_response)
+                        file.close()
                         break
                 if not flag:
                     my_response = f'Bot : Could not found apk {apk} to be launched'
