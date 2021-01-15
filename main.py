@@ -1,10 +1,45 @@
-from tkinter import *
-from functools import partial
-from playsound import playsound
-import webbrowser
-from time import sleep
-import subprocess
-import tkinter.messagebox as tmsg
+try:
+    from tkinter import *
+    from functools import partial
+    from playsound import playsound
+    import webbrowser
+    from time import sleep
+    import subprocess
+    import tkinter.messagebox as tmsg
+    from PIL import ImageGrab
+    from threading import *
+    from random import randint as rin,choice
+except:
+    print('Some of the module is not available please install them first.')
+    print('1. install playsound module use pip install playsound')
+    print('2. install pillow module use pip install pillow')
+    exit()
+
+
+
+def ss_taker(in_put):
+    for element in in_put.split():
+        try:
+            temp = int(element)
+            break
+        except:
+            pass
+    name = ''
+    name += choice([chr(i) for i in range(97,123)])
+    name += choice([chr(i) for i in range(97,123)])
+    name += choice([chr(i) for i in range(65,91)])
+    name += choice([chr(i) for i in range(97,123)])
+    name += choice([chr(i) for i in range(97,123)])
+    name += choice([chr(i) for i in range(65,91)])
+    name += choice([chr(i) for i in range(48,58)])
+    name += choice([chr(i) for i in range(48,58)])
+    name += choice([chr(i) for i in range(65,91)])
+    sleep(temp)
+    ImageGrab.grab().save(fp=f"Screenshot_{name}.jpeg")
+    my_response = f'Bot : Screenshot Saved in same directory as Screenshot_{name}.jpeg'
+    listbox.insert(END,my_response)
+
+
 
 def welcome_message(root):
     Label(root,text="Hello user! welcome to assistant",font=default,bg="yellow").pack(anchor="w",pady=15,padx=15)
@@ -121,7 +156,7 @@ def fetch(root,listbox,in_put):
         my_response = f'Bot : Opening {query} on youtube at your default Browser'
         listbox.insert(END,my_response)
         webbrowser.open(f'https://www.youtube.com/results?search_query={query}')
-    elif 'play' in in_put:
+    elif 'play' in in_put and '.mp3' in in_put:
         l = in_put.split()
         try:
             l.remove('play')
@@ -135,6 +170,23 @@ def fetch(root,listbox,in_put):
         except:
             my_response = f'Bot : Did not found {music} in same directory.'
             listbox.insert(END,my_response)
+    
+    elif 'play' in in_put and '.mp4' in in_put:
+        l = in_put.split()
+        try:
+            l.remove('play')
+            l.remove('on')
+            l.remove('music')
+        except:
+            pass
+        music = ''.join(l)
+        my_response = f'Bot : Currently supports only .mp3 file.'
+        listbox.insert(END,my_response)
+
+    elif 'ss' in in_put and 'take' in in_put and ('after' in in_put or 'in' in in_put):
+        # ss_taker(in_put)
+        thread = Thread(target=partial(ss_taker,in_put))
+        thread.start()
 
     else:
         my_response = f'Bot : Searching is limited please follow Given pattern.'
@@ -161,7 +213,8 @@ if __name__ == "__main__":
     listbox.insert(END ,'6. lauch vscode (if path is available in apk_path.txt)')
     listbox.insert(END ,'7. lauch C://Users//exper//AppData//Local//Programs//Microsoft VS Code//Code.exe')
     listbox.insert(END ,'8. play songname.mp3')
-    listbox.insert(END ,'9. We are working to make it a good assistant <-:::->')
+    listbox.insert(END ,'9. take ss after 2 sec')
+    listbox.insert(END ,'10. We are working to make it a good assistant <-:::->')
     scrollbar.config(command=listbox.yview)
 
     Button(root,text="Exit",bg="red",command=partial(nikal,root)).place(x=100,y=570)
