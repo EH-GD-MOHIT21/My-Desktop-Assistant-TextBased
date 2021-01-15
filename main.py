@@ -32,7 +32,7 @@ def fetch(root,listbox,in_put):
         if 'apk' in in_put:
             l.remove('apk')
         apk = ''.join(l)
-        print(apk)
+        #print(apk)
         if '.exe' not in apk:
             apk = apk + '.exe'
         try:
@@ -52,7 +52,7 @@ def fetch(root,listbox,in_put):
                         break
                     data = line.strip().split('-')
                     name = data[0] + '.exe'
-                    print(f'{name} is loop bu {apk} is above')
+                    #print(f'{name} is loop bu {apk} is above')
                     path = data[1]
                     if name == apk:
                         flag = 1
